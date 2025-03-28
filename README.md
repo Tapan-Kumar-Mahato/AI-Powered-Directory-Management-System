@@ -1,100 +1,134 @@
-#AI-Powered Directory Management System 🗂️
-An intuitive Python-based application that organizes files in a selected folder using AI-powered logic and user-defined filters. This system categorizes files into different types, filters them based on size and date, and provides a clean, automated directory structure.
+# 📂 AI-Powered Directory Management System
 
-Features 🔧
-File Categorization: Automatically moves files into predefined categories (e.g., Images, Videos, Documents).
+An intuitive Python-based application that organizes files in a selected folder using AI-powered logic and user-defined filters. This system categorizes files into different types, applies filters based on size and date, and provides a clean, automated directory structure to improve folder management.
 
-User Filters: Organize files based on:
+---
 
-File Size (e.g., larger than 1MB).
+## 🔑 Key Features
+- **File Categorization:** Automatically organizes files into predefined categories (Images, Videos, Documents, etc.).
+- **User Filters:**  
+  - Filter by **File Size:** Include files larger than a specified size (default: 1 MB).  
+  - Filter by **Last Modified Date:** Include files modified within the last 30 days (configurable).
+- **GUI Interface:** User-friendly Tkinter-based GUI with checkboxes, progress tracking, and file organization buttons.
+- **Themes:** Light and dark mode support for better usability.
+- **Keyboard Shortcuts:** Access key functions quickly using keyboard shortcuts.
+- **Modular Code Structure:** Functions are separated into modules for better readability and maintainability.
 
-Last Modified Date (e.g., modified within the last 30 days).
+---
 
-GUI Interface: Easy-to-use Tkinter interface with progress tracking, checkboxes, and themes.
+## 🛠 Installation Guide
 
-Themes: Toggle between light and dark modes for better usability.
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository_url>
+   cd AI-Directory-Manager
+   ```
 
-Keyboard Shortcuts: Access key functions quickly using shortcuts.
+2. **Install Dependencies:**  
+   Ensure you have Python 3.x installed. Then, run the following command:
+   ```bash
+   pip install -r requirements.txt  # (if applicable)
+   ```
 
-Modular Code Structure: Separate modules for file categorization and filtering to enhance readability and maintainability.
+---
 
-Installation 🏗️
-1. Clone the Repository:
-bash
-Copy
-Edit
-git clone <repository_url>
-cd AI-Directory-Manager
-2. Install Dependencies:
-Ensure you have Python 3.x installed.
+## 🚀 How to Use
 
-Tkinter is required (already built-in with most Python installations).
+1. **Run the Application:**  
+   Launch the application by running:
+   ```bash
+   python main.py
+   ```
 
-Optional: Install dependencies (if any are listed in requirements.txt):
+2. **Select a Folder:**  
+   Click the **"Select Folder and Organize Files"** button to choose the folder you want to organize.
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Usage 🚀
-To Run the Application:
-bash
-Copy
-Edit
-python main.py
-Steps:
-Select Folder: Click the "Select Folder and Organize Files" button to choose the directory you want to organize.
+3. **Apply Filters:**  
+   - **Size Filter:** Optionally filter files larger than the specified size (default: 1 MB).  
+   - **Date Filter:** Optionally filter files modified within the last 30 days.
 
-Apply Filters:
+4. **Track Progress:**  
+   Monitor file processing through the on-screen progress bar.
 
-Size Filter: Filter files larger than a specified size (default: 1 MB).
+5. **Switch Themes:**  
+   Toggle between **light mode** and **dark mode** for a better visual experience.
 
-Date Filter: Filter files based on the last modified date (default: files modified within the last 30 days).
+---
 
-Track Progress: The progress bar shows real-time file processing updates.
+## 📂 Project Structure (Diagrammatic View)
 
-Switch Themes: Use the "Toggle Theme" button to switch between light and dark modes.
+Below is the directory structure of the project and how categorized folders are created dynamically:
 
-Keyboard Shortcuts: Use the following shortcuts:
-
-Ctrl + O: Open folder dialog.
-
-Ctrl + R: Reset all filters and progress.
-
-Ctrl + Q: Quit the application.
-
-Project Structure 📁
-php
-Copy
-Edit
+```
 AI-Directory-Manager/
 │
-├── main.py                 # Main GUI logic
-├── file_organizer.py        # File categorization and organization functions
-├── file_filters.py          # File filtering logic (size and date filters)
-├── README.md                # Project documentation
-└── .gitignore               # Ignore unnecessary files
-How File Filtering Works 🛠️
-File Size Filter: Files larger than 1 MB (or your selected limit) are included during the filtering process.
+├── main.py               --> Main GUI logic (handles user interface and user interactions)
+│
+├── file_organizer.py     --> File categorization logic (organizes files into Images, Videos, etc.)
+│
+├── file_filters.py       --> Filtering logic (filters files by size and date)
+│
+├── README.md             --> Project documentation
+│
+├── requirements.txt      --> Python dependencies (if any)
+│
+└── .gitignore            --> Specifies files and folders to ignore in version control
+```
 
-Date Filter: Files modified within the last 30 days (or your selected limit) are included.
+### 🗂 Categorized Folders (After Running the Program)
+```
+Selected Folder/                --> The folder you choose to organize
+│
+├── Images/                     --> Categorized folder for image files (.jpg, .png, etc.)
+│   ├── file1.jpg
+│   └── file2.png
+│
+├── Videos/                     --> Categorized folder for video files (.mp4, .mkv, etc.)
+│   ├── video1.mp4
+│   └── video2.mkv
+│
+├── Documents/                  --> Categorized folder for document files (.pdf, .txt, etc.)
+│   ├── doc1.pdf
+│   └── doc2.txt
+│
+├── Music/                      --> Categorized folder for music files (.mp3, .wav, etc.)
+│   ├── song1.mp3
+│   └── song2.wav
+│
+└── Others/                     --> Uncategorized files
+    ├── file1.exe
+    └── file2.zip
+```
 
-Toggle Filters: Users can enable or disable these filters via checkboxes in the GUI.
+---
 
-Contributing 🤝
-Contributions are welcome! If you'd like to improve the project, feel free to:
+## ⚙️ How File Filtering Works:
+### 1. **File Size Filter:**
+   - **Default:** Files larger than 1 MB are included during the filtering process.
+   - **Customizable:** The size limit can be changed through the GUI.
 
-Fork the repository.
+### 2. **Date Filter:**
+   - **Default:** Files modified within the last 30 days are included.
+   - **Customizable:** The date limit can be changed through the GUI.
 
-Create a branch for your feature or bug fix.
+---
 
-Submit a pull request.
+## 🛡 License
+This project is licensed under the **MIT License**. Feel free to use, modify, and distribute it as per the license terms.
 
-Suggestions and feedback are always appreciated!
+---
 
-License 📜
-This project is licensed under the MIT License.
-See the LICENSE file for more information.
+## 🤝 Contributing
+Contributions are welcome! If you have any suggestions or improvements, feel free to submit a pull request or open an issue.
 
-Acknowledgments 🌟
-Thanks to the open-source community and Python developers who made this project possible!
+Steps to contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit (`git commit -m "Add new feature"`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Submit a pull request.
+
+---
+
+## 📧 Contact
+For any queries or suggestions, you can reach out at **your-email@example.com**.
