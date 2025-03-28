@@ -70,8 +70,6 @@ AI-Directory-Manager/
 │
 ├── README.md             --> Project documentation
 │
-├── requirements.txt      --> Python dependencies (if any)
-│
 └── .gitignore            --> Specifies files and folders to ignore in version control
 ```
 
