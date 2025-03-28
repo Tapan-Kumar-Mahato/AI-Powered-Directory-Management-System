@@ -1,60 +1,61 @@
-import os
+from collections import defaultdict
 import shutil
-import datetime
+import os
+from file_filters import filter_by_size, filter_by_date  # Import filters
 
-# Define categories for file organization
 FILE_CATEGORIES = {
-    "Images": [".jpg", ".jpeg", ".png", ".gif"],
+    "Documents": [".pdf", ".docx", ".txt", ".xlsx", ".pptx"],
+    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp"],
     "Videos": [".mp4", ".mkv", ".avi"],
-    "Documents": [".pdf", ".docx", ".txt", ".pptx"],
-    "Music": [".mp3", ".wav"],
-    "Archives": [".zip", ".rar", ".7z"],
-    "Code Files": [".py", ".js", ".html", ".css"],
+    "Audio": [".mp3", ".wav", ".flac"],
+    "Archives": [".zip", ".rar", ".tar", ".gz"],
+    "Programs": [".py", ".java", ".cpp", ".html"],
+    "Others": []
 }
-
-# Themes for UI customization
-THEMES = {
-    "dark": {"bg": "#2B2D42", "fg": "#EDF2F4", "btn_bg": "#8D99AE", "btn_fg": "#2B2D42"},
-    "light": {"bg": "#F7F7F7", "fg": "#2B2D42", "btn_bg": "#4CAF50", "btn_fg": "#FFFFFF"},
-}
-
-def move_file(file_path, destination_folder):
-    os.makedirs(destination_folder, exist_ok=True)
-    shutil.move(file_path, os.path.join(destination_folder, os.path.basename(file_path)))
-
 
 def categorize_files(directory, progress_var, file_count_var, selected_categories, summary_var, size_filter, date_filter):
-    total_files = sum(len(files) for _, _, files in os.walk(directory))
+    file_map = defaultdict(list)
+    files_in_dir = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    total_files = len(files_in_dir)
     processed_files = 0
-    file_count_var.set(f"Files Processed: {processed_files}/{total_files}")
 
-    filter_size = 1 * 1024 * 1024 if size_filter.get() else 0  # 1 MB filter
-    recent_days_limit = datetime.timedelta(days=30) if date_filter.get() else None
+    # Apply filters (now handled by functions in file_filters.py)
+    filtered_files = [
+        file for file in files_in_dir
+        if (not size_filter.get() or filter_by_size(os.path.join(directory, file))) and
+           (not date_filter.get() or filter_by_date(os.path.join(directory, file)))
+    ]
 
-    file_summary = {category: 0 for category in FILE_CATEGORIES}
+    total_files = len(filtered_files)  # Update after filtering
 
-    for root, _, files in os.walk(directory):
-        for file in files:
-            file_path = os.path.join(root, file)
-            file_ext = os.path.splitext(file)[1].lower()
+    for file in filtered_files:
+        file_path = os.path.join(directory, file)
+        _, extension = os.path.splitext(file)
+        categorized = False
 
-            if os.path.getsize(file_path) < filter_size:
+        for category, extensions in FILE_CATEGORIES.items():
+            if extension.lower() in extensions and selected_categories[category].get() == 1:
+                file_map[category].append(file_path)
+                categorized = True
+                break
+        if not categorized and selected_categories["Others"].get() == 1:
+            file_map["Others"].append(file_path)
+
+        processed_files += 1
+        progress_var.set((processed_files / total_files) * 100)
+        file_count_var.set(f"Files Processed: {processed_files}/{total_files}")
+
+    summary = "Files Organized:\n"
+    for category, files in file_map.items():
+        category_folder = os.path.join(directory, category)
+        os.makedirs(category_folder, exist_ok=True)
+        for file_path in files:
+            try:
+                shutil.move(file_path, category_folder)
+            except Exception as e:
+                summary += f"Failed to move {file_path}: {str(e)}\n"
                 continue
 
-            if recent_days_limit:
-                file_mod_time = datetime.datetime.fromtimestamp(os.path.getmtime(file_path))
-                if datetime.datetime.now() - file_mod_time > recent_days_limit:
-                    continue
+        summary += f"{category}: {len(files)} files\n"
 
-            for category, extensions in FILE_CATEGORIES.items():
-                if file_ext in extensions and selected_categories[category].get():
-                    destination_folder = os.path.join(directory, category)
-                    move_file(file_path, destination_folder)
-                    file_summary[category] += 1
-                    break
-
-            processed_files += 1
-            progress_var.set((processed_files / total_files) * 100)
-            file_count_var.set(f"Files Processed: {processed_files}/{total_files}")
-
-    summary_var.set("\n".join(f"{category}: {count} files" for category, count in file_summary.items() if count > 0))
+    summary_var.set(summary)
