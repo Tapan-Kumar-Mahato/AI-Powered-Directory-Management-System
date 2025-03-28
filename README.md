@@ -1,2 +1,67 @@
-# AI-Powered-Directory-Management-System
-The AI-Powered Directory Management System is an intelligent and automated solution designed to streamline the organization and management of files and directories. This system leverages AI algorithms to perform key tasks such as automatic file sorting, duplicate file detection and removal, directory cleanup, and generating AI-based insights to optimize storage usage. It categorizes files based on type (e.g., documents, images, videos) and allows users to set custom rules to match specific organizational preferences. The system also detects unused or empty folders and provides recommendations on rarely accessed or obsolete files. Easy to set up and use, the tool requires Python (version 3.8 or higher) and a few dependencies, which can be installed using the included requirements.txt file. With just a few steps, users can launch the system, select a directory to manage, and apply actions like file organization, duplicate removal, and cleaning. The tool's behavior can be customized through a config.json file, enabling flexible file handling according to user needs. Future enhancements include integration with cloud storage services, real-time notifications for large or newly added files, and a user-friendly graphical interface (GUI). Licensed under the MIT License, this open-source project invites contributions from developers, encouraging continuous improvement and innovation. For more details, issues, or queries, users can contact the support team or visit the GitHub Issues page.
+# AI-Powered Directory Management System
+
+An intuitive Python-based application that organizes files in a selected folder using AI-powered logic and user-defined filters. This system categorizes files into different types, filters them based on size and date, and provides a clean, automated directory structure.
+
+---
+
+## Features
+- **File Categorization:** Automatically moves files into predefined categories (Images, Videos, Documents, etc.).
+- **User Filters:** Organize based on file size (e.g., larger than 1MB) and last modified date.
+- **GUI Interface:** Easy-to-use Tkinter interface with progress tracking, checkboxes, and themes.
+- **Themes:** Switch between light and dark modes for better usability.
+- **Keyboard Shortcuts:** Access key functions quickly using shortcuts.
+
+---
+
+## Installation
+
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository_url>
+   cd AI-Directory-Manager
+   ```
+
+2. **Install Dependencies:**
+   - Ensure you have Python installed (version 3.x).
+   - Install `tkinter` (built-in in most Python installations).
+
+   ```bash
+   pip install -r requirements.txt  # (If applicable)
+   ```
+
+---
+
+## Usage
+
+1. **Run the Application:**
+   ```bash
+   python main.py
+   ```
+
+2. **Select Folder:** Click the "Select Folder and Organize Files" button.
+3. **Apply Filters:** Use checkboxes to filter files by size and date.
+4. **Track Progress:** View the file processing status through a progress bar.
+5. **Switch Themes:** Click "Toggle Theme" to switch between light and dark modes.
+
+---
+
+## Project Structure
+```
+AI-Directory-Manager/
+│
+├── main.py              # Main GUI logic
+├── file_organizer.py    # File categorization and organization functions
+├── README.md            # Project documentation
+└── .gitignore           # Ignore unnecessary files
+```
+
+---
+
+## Contributing
+Feel free to fork the project and submit pull requests. Suggestions and improvements are always welcome!
+
+---
+
+## License
+This project is licensed under the MIT License.
+
